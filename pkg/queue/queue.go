@@ -6,6 +6,8 @@ type IQueue[T any] interface {
 	Enqueue(value T)
 	Dequeue() (T, error)
 	Peek() (T, error)
+	IsEmpty() bool
+	Len() int
 }
 
 type Queue[T any] struct {
@@ -45,4 +47,12 @@ func (queue *Queue[T]) Peek() (T, error) {
 	}
 	ref := queue.collection[queue.next]
 	return ref, nil
+}
+
+func (queue *Queue[T]) IsEmpty() bool {
+	return len(queue.collection) == 0
+}
+
+func (queue *Queue[T]) Len() int {
+	return len(queue.collection)
 }

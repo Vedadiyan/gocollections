@@ -8,6 +8,8 @@ type IStack[T any] interface {
 	Push(value T)
 	Pop() (T, error)
 	Peek() (T, error)
+	IsEmpty() bool
+	Len() int
 }
 
 type Stack[T any] struct {
@@ -43,4 +45,12 @@ func (stack *Stack[T]) Peek() (T, error) {
 	}
 	ref := stack.collection[len-1]
 	return ref, nil
+}
+
+func (stack *Stack[T]) IsEmpty() bool {
+	return len(stack.collection) == 0
+}
+
+func (stack *Stack[T]) Len() int {
+	return len(stack.collection)
 }
